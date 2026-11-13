@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #FF5A1F;
+  --color-accent-dark: #E64A12;
+  --color-ink: #0A0A0A;
+  --color-mist: #F3F3F1;
+  --color-line: #E7E7E4;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Unbounded", "Manrope", system-ui, sans-serif;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-fade-up: fade-up .5s ease both;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-12deg); }
+    50% { transform: translateY(-14px) rotate(-10deg); }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-white text-ink font-sans antialiased; }
+  ::selection { background: var(--color-accent); color: white; }
+  input, select, textarea, button { font: inherit; }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold tracking-wide transition-all duration-200 active:scale-[.98] disabled:pointer-events-none disabled:opacity-40;
+}
+@utility btn-primary {
+  @apply btn bg-ink text-white hover:bg-accent;
+}
+@utility btn-accent {
+  @apply btn bg-accent text-white hover:bg-accent-dark;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-white text-ink hover:border-ink;
+}
+@utility input {
+  @apply w-full rounded-2xl border border-line bg-white px-4 py-3.5 text-[15px] outline-none transition placeholder:text-neutral-400 focus:border-ink focus:ring-4 focus:ring-black/5;
+}
+@utility input-error {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500/10;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold;
+}
+@utility chip {
+  @apply inline-flex items-center rounded-full border border-line px-3.5 py-2 text-sm font-semibold transition hover:border-ink;
+}
+@utility chip-on {
+  @apply border-ink bg-ink text-white;
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
